@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class ReportBook
+public class ReportBook implements Comparable<ReportBook>
 {
     private String lastName, firstName, patronymic;
     private int course;
@@ -20,6 +20,10 @@ public class ReportBook
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public void setSessions(int sessionNumber, int numberOfExams, ArrayList<String> nE, ArrayList<String> nT, ArrayList<Integer> eG)
@@ -54,6 +58,13 @@ public class ReportBook
             else res+= "Excellent: no\n\n";
         }
         return res;
+    }
+
+    @Override
+    public int compareTo(ReportBook o)
+    {
+        return lastName.compareTo(o.lastName);
+        //return Number_Bradebook > o.Number_Bradebook ? 1 : Number_Bradebook == o.Number_Bradebook ? 0 : -1;
     }
 
 

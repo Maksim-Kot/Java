@@ -1,19 +1,19 @@
-Last name: Sherbacheniya
-First name: Michael
-Patronymic: Evgenievich
+Last name: Kot
+First name: Maksim
+Patronymic: Arturovich
 Course: 2
 Group: 6
 Amount of session: 2
 
 Session number: 1
 Amount of exams: 2
-DY 2 Radino
-MA 7 Mazanik
-Excellent: no
+DY 9 Radino
+MA 9 Mazanik
+Excellent: yes
 
 Session number: 2
 Amount of exams: 2
 History 10 Lebedeva
-DMA 8 Volchkova
-Excellent: no
+DMA 9 Volchkova
+Excellent: yes
 

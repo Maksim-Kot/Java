@@ -3,8 +3,19 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
+
+class FirstNameReportBookComparator implements Comparator<ReportBook>
+{
+    @Override
+    public int compare(ReportBook o1, ReportBook o2)
+    {
+        return o2.getFirstName().compareTo(o1.getFirstName());
+    }
+}
 public class Main {
     public static void main(String[] args) {
         File file = new File("./input.txt");
@@ -74,6 +85,7 @@ public class Main {
                 }
             }
             if(!hasBadStudent) System.out.println("No such students");
+            System.out.println();
 
 
 
@@ -83,10 +95,24 @@ public class Main {
         if(groupOfStudent.get(1).isBadStudent()) System.out.println("Bad student!");
         else System.out.println("Good student!");*/
 
+            FirstNameReportBookComparator comp = new FirstNameReportBookComparator();
+            Collections.sort(groupOfStudent, comp);
+
+            for(int i = 0; i < amountOfStudent; i++)
+            {
+                System.out.println(groupOfStudent.get(i).getLastName());
+            }
+
+            ReportBook a= new ReportBook("Sherbacheniya", " ", " ", 0, 0);
+            int index = Collections.binarySearch(groupOfStudent, a);
+            System.out.println(index);
+
             FileWriter writer = new FileWriter("output.txt");
             writer.write(groupOfStudent.get(2).toString());
             writer.flush();
         }
+
+
 
         catch (FileNotFoundException e){
             System.out.println("File not found");
