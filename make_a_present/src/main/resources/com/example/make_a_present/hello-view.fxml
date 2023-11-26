@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.make_a_present.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <Label alignment="CENTER" text="Factory" textAlignment="CENTER" />
+            <Label alignment="CENTER" text="Present" textAlignment="CENTER" GridPane.columnIndex="1" />
+            <CheckBox fx:id="Modum" mnemonicParsing="false" onAction="#onModumButtonClick" GridPane.rowIndex="1" />
+            <CheckBox fx:id="OZ" mnemonicParsing="false" onAction="#onOZButtonClick" GridPane.rowIndex="2" />
+            <CheckBox fx:id="Gift" mnemonicParsing="false" onAction="#onGiftButtonClick" GridPane.rowIndex="3" />
+            <CheckBox fx:id="Toy" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckBox fx:id="Letter" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <CheckBox fx:id="Card" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        </children>
+    </GridPane>
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <CheckBox fx:id="Concert" mnemonicParsing="false" text="Concert" />
+            <CheckBox fx:id="Regular" mnemonicParsing="false" text="Regular" GridPane.columnIndex="1" />
+        </children>
+    </GridPane>
+
+    <Label fx:id="welcomeText" />
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <Button onAction="#onHelloButtonClick" prefHeight="25.0" prefWidth="96.0" text="Calculate!" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" onAction="#onGenerateButtonClick" prefHeight="25.0" prefWidth="96.0" text="Generate" />
+        </children>
+    </GridPane>
+</VBox>
