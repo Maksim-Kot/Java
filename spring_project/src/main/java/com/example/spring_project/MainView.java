@@ -12,15 +12,17 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 @Route("")
 public class MainView extends VerticalLayout {
     private Grid<Present> grid = new Grid<>(Present.class, false);
+
+    private String nameFactory;
 
     public MainView() throws FileNotFoundException {
 
@@ -38,10 +40,12 @@ public class MainView extends VerticalLayout {
                     selection.getAllSelectedItems().size());
         });
 
+
         ComboBox<String> comboBox = new ComboBox<>();
         comboBox.setItems(factories.getNames());
         comboBox.addValueChangeListener(event -> {
             if (event.getValue() != null) {
+                nameFactory = event.getValue().toString();
                 System.out.println(event.getValue().toString());
                 grid.setItems(factories.Find(event.getValue().toString()).presents);
             } else {
@@ -60,7 +64,17 @@ public class MainView extends VerticalLayout {
         addButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         layout.add(concert, regular, addButton, text);
 
-
+        addButton.addClickListener(click -> {
+            double res = 0;
+            Iterator<Present> iterator = need.iterator();
+            for (Present present : need) {
+                System.out.println(present); // выводит все элементы в произвольном порядке
+                res += present.getPrice();
+            }
+            if(concert.getValue()) res += factories.Find(nameFactory).priceForConcert;
+            if(regular.getValue()) res *= 0.9;
+            text.setValue(Double.toString(res));
+        });
 
         add(comboBox, grid, layout);
     }
