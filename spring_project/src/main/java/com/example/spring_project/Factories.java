@@ -11,6 +11,16 @@ public class Factories
 {
     ArrayList<Factory> factories;
 
+    public ArrayList<String> getNames()
+    {
+        ArrayList<String> names = new ArrayList<>();
+        for(int i = 0; i < factories.size();++i)
+        {
+            names.add(factories.get(i).name);
+        }
+        return names;
+    }
+
     public Factory Find(String name)
     {
         for(int i = 0; i < factories.size(); ++i)
@@ -82,6 +92,14 @@ class Present
 {
     String name;
     int price;
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 
     public Present(String name, int price)
     {
