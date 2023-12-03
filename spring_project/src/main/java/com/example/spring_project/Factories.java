@@ -2,6 +2,7 @@ package com.example.spring_project;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -57,6 +58,13 @@ public class Factories
             if (scanner.hasNext()) scanner.nextLine();
             factories.add(fact);
         }
+    }
+
+    public Factories(String s) throws SQLException, ClassNotFoundException {
+        DBConnector DBCon = new DBConnector();
+        DBCon.connect();
+        factories = DBCon.returnArray();
+        DBCon.close();
     }
 }
 

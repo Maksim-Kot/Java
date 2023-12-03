@@ -13,6 +13,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -24,14 +25,45 @@ public class MainView extends VerticalLayout {
 
     private String nameFactory;
 
-    public MainView() throws FileNotFoundException {
+    private Factories factories;
+
+    public MainView() throws FileNotFoundException, SQLException, ClassNotFoundException {
 
         grid.setSelectionMode(Grid.SelectionMode.MULTI);
         grid.addColumn(Present::getName).setHeader("Name");
         grid.addColumn(Present::getPrice).setHeader("Price");
 
         Set<Present> need = new HashSet<>();
-        Factories factories = new Factories();
+
+        ComboBox<String> comboBox = new ComboBox<>();
+        ComboBox<String> comboBoxBase = new ComboBox<>();
+        comboBoxBase.setItems("TXT", "Data base");
+        comboBoxBase.addValueChangeListener(event -> {
+            if (event.getValue() != null) {
+                if(event.getValue().equals("TXT"))
+                {
+                    try {
+                        factories = new Factories();
+                        comboBox.setItems(factories.getNames());
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                if(event.getValue().equals("Data base"))
+                {
+                    try {
+                        factories = new Factories("base");
+                        comboBox.setItems(factories.getNames());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            } else {
+                System.out.println("value is null");
+            }
+        });
 
         grid.addSelectionListener(selection -> {
             need.clear();
@@ -41,8 +73,6 @@ public class MainView extends VerticalLayout {
         });
 
 
-        ComboBox<String> comboBox = new ComboBox<>();
-        comboBox.setItems(factories.getNames());
         comboBox.addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 nameFactory = event.getValue().toString();
@@ -76,6 +106,9 @@ public class MainView extends VerticalLayout {
             text.setValue(Double.toString(res));
         });
 
-        add(comboBox, grid, layout);
+        var layoutUp = new HorizontalLayout();
+        layout.setAlignItems(Alignment.BASELINE);
+        layoutUp.add(comboBoxBase, comboBox);
+        add(layoutUp, grid, layout);
     }
 }
